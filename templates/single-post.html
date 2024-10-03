@@ -1,0 +1,310 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+
+
+{% block link %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="stylesheet" href="style.css">
+<main id="main">
+
+  {% endblock %}
+
+
+  {% block nav %}
+
+  <center style=" background-image: radial-gradient( rgb(247, 36, 8) 1%, rgb(60, 240, 11) 50%, rgb(12, 133, 239));">
+    <section class="single-post-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9 post-content" data-aos="fade-up" style="margin-left: 150px;">
+
+            <!-- ======= Single Post Content ======= -->
+            <div class="single-post">
+              <div class="post-meta"><span class="date">Business</span> <span class="mx-1">&bullet;</span> <span>Jul 5th
+                  '22</span></div>
+              <h1 class="mb-5" style="color: aliceblue;">{{ p.nomi }}</h1>
+              <h4 style="color: aliceblue;">{{ p.narxi }}</h4>
+
+
+
+              <figure class="my-4">
+                <!-- slide boshi -->
+
+
+
+
+                <!-- ======= Hero Slider Section ======= -->
+                <section id="hero-slider" class="hero-slider">
+                  <div class="container-md" data-aos="fade-in">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="swiper sliderFeaturedPosts">
+                          <div class="swiper-wrapper">
+                            {% for i in p.product_images.all %}
+                            <div class="swiper-slide"
+                              style="background-image: url({{i.image.url}}); background-position: center; background-repeat: no-repeat; height: 500px;">
+                              <a href="{% url 'detail' p.id %}" class="img-bg d-flex align-items-end"
+                                style="background-image: url('assets/img/post-slide-1.jpg');">
+                              </a>
+                            </div>
+                            {% endfor %}
+                          </div>
+                          <div class="custom-swiper-button-next">
+                            <!-- <span class="bi-chevron-right"></span> -->
+                          </div>
+                          <div class="custom-swiper-button-prev">
+                            <!-- <span class="bi-chevron-left"></span> -->
+                          </div>
+
+                          <div class="swiper-pagination"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                <!-- End Hero Slider Section -->
+
+                <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button> -->
+            </div>
+
+
+            <!-- slide ohiri -->
+            <figcaption></figcaption>
+            </figure>
+
+
+
+            <h4 style="color: aliceblue;">{{ p.batafsil }}</h4>
+
+          </div><!-- End Single Post Content -->
+          <br><br><br>
+
+          <!-- accardion boshi -->
+
+
+
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button style="background-color: aqua;" class="accordion-button" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Izohlar
+                </button>
+              </h2>
+              <div style="background-color: aquamarine;" id="collapseOne" class="accordion-collapse collapse show"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body" style="background-color: aquamarine;">
+
+
+
+                  <!-- comment start -->
+
+                  <div class="container" style="background-color: aquamarine;">
+
+                    <!-- write comment -->
+                    <div class="coment-bottom bg-white p-2 px-4" style="background-color: aquamarine;">
+                      <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="d-flex flex-row add-comment-section mt-4 mb-4"><img
+                            class="img-fluid img-responsive rounded-circle mr-2" src="https://i.imgur.com/qdiP4DB.jpg"
+                            width="38">
+
+                          <input type="text" class="form-control mr-3 " name='comment' placeholder="Izoh qoldirish">
+                          <button class="btn btn-primary" type="submit">Comment</button>
+                      </form>
+                    </div>
+                    <!-- end write comment -->
+
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <h3 class="text-center mb-5">
+                          Nested comment section
+                        </h3>
+                        {% for i in p.product_comment.all %}
+
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="media">
+
+                              <div class="row">
+                                <div class="col-1">
+                                  <img class="mr-3 rounded-circle" width="100px" alt="Bootstrap Media Preview"
+                                    src="https://i.imgur.com/stD0Q19.jpg" />
+                                </div>
+                                <div class="col-5">
+                                  <div class="media-body">
+                                    <div class="row">
+                                      <div class="col-8 d-flex">
+                                        <h5>{{ i.user.username }}</h5>
+                                        <span>- 2 hours ago</span>
+                                        <span> </span>
+
+
+                                      </div>
+                                      <h4>{{ i.comment }}</h4>
+
+
+                                      <div class="col-4">
+
+                                        <div class="pull-right reply">
+
+                                          <a href="#" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                            aria-expanded="false" aria-controls="collapseTwo"><span><i
+                                                class="fa fa-reply"></i></span></a>
+                                          <div class="accordion" id="accordionExample">
+
+                                            <div class="accordion-item" style="width: 150px; border:none;">
+                                              <h2 class="accordion-header" style="width: 40px;">
+                                                <a class="button" href="#" data-bs-toggle="collapse"
+                                                  data-bs-target="#collapseTwo" aria-expanded="false"
+                                                  aria-controls="collapseTwo"><span><i class="fa fa-reply"></i>
+                                                  </span></a>
+                                              </h2>
+
+
+                                              <p><button
+                                                  style="background-color: yellow; border-radius: 40%; text-align: center;"
+                                                  class="accordion-button collapsed" type="button"
+                                                  data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo{{i.id}}"
+                                                  aria-expanded="false" aria-controls="flush-collapseTwo">
+                                                  replies
+                                                </button>
+                                              </p>
+
+
+                                              <div class="accordion-body">
+
+
+
+                                              </div>
+                                              <div id="collapseTwo{{i.id}}" class="accordion-collapse collapse"
+                                                data-bs-parent="#accordionExample">
+                                              </div>
+                                            </div>
+                                          </div>
+
+                                        </div>
+                                      </div>
+
+
+
+                                    </div>
+                                  </div>
+
+                                  <div class="row">
+                                    <div class="col-3"></div>
+                                    <div class="col-5">
+                                      <div class="accordion accordion-flush" id="accordionFlushExample">
+                                        <div class="accordion-item">
+                                          <h2 class="accordion-header">
+
+                                          </h2>
+                                          <div id="flush-collapseTwo{{i.id}}" class="accordion-collapse collapse"
+                                            data-bs-parent="#accordionFlushExample">
+
+                                            {% if i.replies.exists %}
+                                            {% for k in i.comment_replies %}
+                                            <div class="media mt-4">
+                                              <a class="pr-3" href="#"><img class="rounded-circle" width="100px"
+                                                  alt="Bootstrap Media Another Preview"
+                                                  src="https://i.imgur.com/xELPaag.jpg" /></a>
+                                              <div class="media-body">
+
+                                                <div class="row">
+                                                  <div class="col-12 d-flex">
+                                                    <h5>{{ k.username.user }}</h5>
+                                                    <span>- 3 hours ago</span>
+                                                  </div>
+
+
+                                                </div>
+
+                                                {{ k.replies }}
+                                                {% endfor %}
+                                                {% else %}
+                                                <h2>Javoblar mavjud emas</h2>
+                                                {% endif %}
+                                                <!-- write comment -->
+                                                <div class="coment-bottom bg-white p-2 px-4"
+                                                  style="background-color: aquamarine;">
+                                                  <form action="" method="post">
+                                                    {% csrf_token %}
+                                                    <div class="d-flex flex-row add-comment-section mt-4 mb-4"><img
+                                                        class="img-fluid img-responsive rounded-circle mr-2"
+                                                        src="https://i.imgur.com/qdiP4DB.jpg" width="38">
+                                                      <input type="hidden" name="comment_id" value="{{i.id}}">
+                                                      <input type="text" class="form-control mr-3 " name='reply'
+                                                        placeholder="Izoh qoldirish">
+                                                      <button class="btn btn-primary" type="submit">Reply</button>
+                                                  </form>
+                                                </div>
+                                                <!-- end write comment -->
+
+                                              </div>
+                                            </div>
+
+
+
+                                          </div>
+                                          <div class="col-2"></div>
+                                        </div>
+                                      </div>
+
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+
+                          {% endfor %}
+
+                        </div>
+
+                      </div>
+                    </div>
+
+
+                    <!-- comment end -->
+
+
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+
+
+
+
+            <!-- accordion ixiri -->
+
+
+
+
+
+          </div>
+    </section>
+</main><!-- End #main -->
+</div>
+</center>
+
+
+
+{% endblock %}
