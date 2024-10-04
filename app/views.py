@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import *
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 def home(request):
     product = Product.objects.all()
     if request.GET.get('search'):
@@ -17,7 +17,7 @@ def home(request):
     return render(request,'index.html',{'product':product, 'categories': categories})
 
     
-@login_required(login_url='login')
+# @login_required(login_url='login')
 # def detail(request,id):
 #     p = Product.objects.get(id=id)
 #     comment = Comment.objects.all()
@@ -87,7 +87,7 @@ def Login(request):
 	return render( request , 'form.html' , { 'form' : form } )
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 def create(request):
     form = ProductForm()
     if request.POST:
