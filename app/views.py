@@ -84,7 +84,7 @@ def Login(request):
 			if d is not None:
 				login(request,d)
 				return redirect( 'home' )
-	return render( request , 'form.html' , { 'form' : form } )
+	return render( request , 'login.html' , { 'form' : form } )
 
 
 # @login_required(login_url='login')
